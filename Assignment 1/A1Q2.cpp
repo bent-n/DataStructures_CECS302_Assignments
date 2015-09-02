@@ -13,11 +13,11 @@ Explain what can be done if these operations are performed on an empty collectio
 #include<stdlib.h>
 
 
-class Comparable{
+class ComparableClass{
 	private:
 		int size;
 	public:
-		Comparable():size(0){}
+		ComparableClass():size(0){}
 		int getSize()
 		{
 			return size;
@@ -28,6 +28,7 @@ class Comparable{
 		}
 };
 
+template<typename Comparable>
 class OrderedCollection
 {
 	private:
@@ -95,7 +96,7 @@ class OrderedCollection
 
 int main()
 {
-	OrderedCollection oc1;
+	OrderedCollection<ComparableClass> oc1;
 	
 	return 0;
 }
