@@ -16,13 +16,9 @@ class Rectangle
 		int width;
 	public:
 		Rectangle():length(0),width(0)
-		{
-		}
-		Rectangle(int l,int w)
-		{
-			length=l;
-			width=w;
-		}
+		{}
+		Rectangle(int l,int w):length(l),width(w)
+		{}
 		int getLength()
 		{
 			return length;
@@ -51,7 +47,7 @@ int main()
 		if(((rectangles[i].getLength())+(rectangles[i].getWidth()))>((maxP.getLength())+(maxP.getWidth())))
 			maxP=rectangles[i];
 	}
-	cout<<endl<<"Max Area: ";
+	cout<<"Max Area: ";
 	maxA.display();
 	
 	cout<<endl<<"Max Perimeter: ";
