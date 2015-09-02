@@ -27,6 +27,8 @@ class matrix
 		matrix( vector<vector<Object>> && v ) : array{ std::move( v ) }
 		{ }
 		
+		matrix(): array(vector<vector<Object>>) {}//WBP Zero-param constructor
+		
 		const vector<Object> & operator[]( int row ) const
 		{ return array[ row ]; }
 		
@@ -38,6 +40,12 @@ class matrix
 		
 		int numcols( ) const
 		{ return numrows( ) ? array[ 0 ].size( ) : 0; }
+		
+		void resize(int rows, int cols)//WBP resize member function
+		{
+			for( auto & thisRow : array )
+				thisRow.resize( cols );
+		}
 		
 	private:
 		vector<vector<Object>> array;
