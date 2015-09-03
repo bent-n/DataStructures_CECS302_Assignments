@@ -19,15 +19,15 @@ class Rectangle
 		{}
 		Rectangle(int l,int w):length(l),width(w)
 		{}
-		int getLength()
+		int getLength() const
 		{
 			return length;
 		}
-		int getWidth()
+		int getWidth() const
 		{
 			return width;
 		}
-		void display()
+		void display() const
 		{
 			cout<<"Width: "<<width<<" Length: "<<length;
 		}
@@ -41,10 +41,10 @@ int main()
 	class Rectangle rectangles[3]={r1,r2,r3};
 	for(int i=0;i<3;i++)
 	{
-		if(((rectangles[i].getLength())*(rectangles[i].getWidth()))>((maxA.getLength())*(maxA.getWidth())))
+		if(((rectangles[i].getLength())*(rectangles[i].getWidth()))>((maxA.getLength())*(maxA.getWidth())))//Determines Rectangle with largest area
 			maxA=rectangles[i];
 		
-		if(((rectangles[i].getLength())+(rectangles[i].getWidth()))>((maxP.getLength())+(maxP.getWidth())))
+		if(((rectangles[i].getLength())+(rectangles[i].getWidth()))>((maxP.getLength())+(maxP.getWidth())))//Determines Rectangle with largest perimeter
 			maxP=rectangles[i];
 	}
 	cout<<"Max Area: ";

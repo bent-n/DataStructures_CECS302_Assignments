@@ -43,6 +43,7 @@ class matrix
 		
 		void resize(int rows, int cols)//WBP resize member function
 		{
+			array.resize(rows)
 			for( auto & thisRow : array )
 				thisRow.resize( cols );
 		}
