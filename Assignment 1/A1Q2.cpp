@@ -26,6 +26,14 @@ class ComparableClass{
 		{
 			size=entry;
 		}
+		bool operator<(const ComparableClass & rhs)
+		{
+			return size<rhs.getSize();
+		}
+		bool operator>(const ComparableClass & rhs)
+		{
+			return size>rhs.getSize();
+		}
 };
 */
 template<typename Comparable>
@@ -95,7 +103,7 @@ class OrderedCollection
 			for(i=0;i<size;i++)
 			{
 				tempComp=collection[i];
-				if (tempComp.getSize()<min.getSize())
+				if (tempComp < min)
 					min=tempComp;
 			}
 			return min;
@@ -107,7 +115,7 @@ class OrderedCollection
 			for(i=0;i<size;i++)
 			{
 				tempComp=collection[i];
-				if (tempComp.getSize()>max.getSize())
+				if (tempComp > max)
 					max=tempComp;
 			}
 			return max;
