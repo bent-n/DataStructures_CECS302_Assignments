@@ -52,32 +52,30 @@ class OrderedCollection
 		~OrderedCollection(){ delete collection;}//Destructor
 		bool isEmpty()
 		{
-			if(size==0)
-				return 1;
-			else
-				return 0;
+			for(int i=0;i<size;i++)
+				{
+					if(collection[i]!=0;)
+						return 0;	
+				}
+			return 1;
 		}
 		void makeEmpty()
 		{
-			for(int i=0;i<size;i++)
+			if(!isEmpty())
 			{
-				collection[i]=0;
-			}
-			
-			
+				for(int i=0;i<size;i++)
+				{
+					collection[i]=0;
+				}
+			}	
 		}
 		void insert(Comparable entry, int i)
-		{
-			
-				collection[i]=entry;
-				
-		
-			
+		{	
+				collection[i]=entry;			
 		}
 		void remove(int i)
 		{
-			collection[i]=0;
-			
+			collection[i]=0;	
 		}
 		Comparable getComparable(int i=0) const
 		{
@@ -85,6 +83,10 @@ class OrderedCollection
 		}
 		Comparable findMin() const
 		{
+			if(isEmpty())
+			{
+				return collection[0];
+			}
 			int i;
 			Comparable tempComp,min;
 			for(i=0;i<size;i++)
@@ -97,6 +99,10 @@ class OrderedCollection
 		}
 		Comparable findMax() const
 		{
+			if(isEmpty())
+			{
+				return collection[0];
+			}
 			int i;
 			Comparable tempComp,max;
 			for(i=0;i<size;i++)
