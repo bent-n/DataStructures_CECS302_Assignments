@@ -26,11 +26,11 @@ class ComparableClass{
 		{
 			size=entry;
 		}
-		bool operator<(const ComparableClass & rhs)
+		bool operator<( ComparableClass & rhs)
 		{
 			return size<rhs.getSize();
 		}
-		bool operator>(const ComparableClass & rhs)
+		bool operator>(ComparableClass & rhs)
 		{
 			return size>rhs.getSize();
 		}
@@ -41,19 +41,15 @@ class OrderedCollection
 {
 	private:
 		int size;
-		Comparable* collection;
+		Comparable *collection;
 	public:
-		OrderedCollection() : size(0), collection(0)
+		OrderedCollection(int s) : size(s) 
 		{
-			collection=(Comparable*)malloc(sizeof(Comparable));
-			if(collection==NULL)
-			{
-				std::cout<<"Memory Allocation Failed!\nDestroying Collection";
-				OrderedCollection::~OrderedCollection();
-			}
-			
+			Comparable temp[size];
+			collection=temp;
+			free(temp);
 		}//Constructor
-		~OrderedCollection(){ free(collection);	}//Destructor
+		~OrderedCollection(){ delete collection;}//Destructor
 		bool isEmpty()
 		{
 			if(size==0)
@@ -63,33 +59,24 @@ class OrderedCollection
 		}
 		void makeEmpty()
 		{
-			collection=(Comparable*)realloc(collection, sizeof(Comparable));
-			if(collection!=NULL)
-				size=0;
-			else	
-				std::cout<<"Memory Realloc failed!";
-			
-			
-		}
-		void insert(Comparable entry)
-		{
-			collection = (Comparable*)realloc(collection, (sizeof(Comparable)*(size+1))); //Reallocates memory
-			if(collection!=NULL)
+			for(int i=0;i<size;i++)
 			{
-				collection[size]=entry;
-				size++;
+				collection[i]=0;
 			}
-			else
-				std::cout<<"Memory Realloc failed!";
+			
 			
 		}
-		void remove()
+		void insert(Comparable entry, int i)
 		{
-			collection = (Comparable*)realloc(collection, (sizeof(Comparable)*(size-1)));
-			if(collection!=NULL)
-				size--;
-			else
-				std::cout<<"Memory Realloc failed!";
+			
+				collection[i]=entry;
+				
+		
+			
+		}
+		void remove(int i)
+		{
+			collection[i]=0;
 			
 		}
 		Comparable getComparable(int i=0) const
@@ -124,7 +111,8 @@ class OrderedCollection
 /*//Testing Purposes
 int main()
 {
-	OrderedCollection<ComparableClass> oc1;
+	OrderedCollection<ComparableClass> oc1(5);
+	std::cout<<"test";
 	return 0;
 }
 */
