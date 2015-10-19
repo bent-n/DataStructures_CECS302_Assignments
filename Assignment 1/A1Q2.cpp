@@ -26,11 +26,11 @@ class ComparableClass{
 		{
 			size=entry;
 		}
-		bool operator<(const ComparableClass & rhs)
+		bool operator<( ComparableClass & rhs)
 		{
 			return size<rhs.getSize();
 		}
-		bool operator>(const ComparableClass & rhs)
+		bool operator>(ComparableClass & rhs)
 		{
 			return size>rhs.getSize();
 		}
@@ -41,56 +41,41 @@ class OrderedCollection
 {
 	private:
 		int size;
-		Comparable* collection;
+		Comparable *collection;
 	public:
-		OrderedCollection() : size(0), collection(0)
+		OrderedCollection(int s) : size(s) 
 		{
-			collection=(Comparable*)malloc(sizeof(Comparable));
-			if(collection==NULL)
-			{
-				std::cout<<"Memory Allocation Failed!\nDestroying Collection";
-				OrderedCollection::~OrderedCollection();
-			}
-			
+			Comparable temp[size];
+			collection=temp;
+			free(temp);
 		}//Constructor
-		~OrderedCollection(){ free(collection);	}//Destructor
+		~OrderedCollection(){ delete collection;}//Destructor
 		bool isEmpty()
 		{
-			if(size==0)
-				return 1;
-			else
-				return 0;
+			for(int i=0;i<size;i++)
+				{
+					if(collection[i]!=0;)
+						return 0;	
+				}
+			return 1;
 		}
 		void makeEmpty()
 		{
-			collection=(Comparable*)realloc(collection, sizeof(Comparable));
-			if(collection!=NULL)
-				size=0;
-			else	
-				std::cout<<"Memory Realloc failed!";
-			
-			
-		}
-		void insert(Comparable entry)
-		{
-			collection = (Comparable*)realloc(collection, (sizeof(Comparable)*(size+1))); //Reallocates memory
-			if(collection!=NULL)
+			if(!isEmpty())
 			{
-				collection[size]=entry;
-				size++;
-			}
-			else
-				std::cout<<"Memory Realloc failed!";
-			
+				for(int i=0;i<size;i++)
+				{
+					collection[i]=0;
+				}
+			}	
 		}
-		void remove()
+		void insert(Comparable entry, int i)
+		{	
+				collection[i]=entry;			
+		}
+		void remove(int i)
 		{
-			collection = (Comparable*)realloc(collection, (sizeof(Comparable)*(size-1)));
-			if(collection!=NULL)
-				size--;
-			else
-				std::cout<<"Memory Realloc failed!";
-			
+			collection[i]=0;	
 		}
 		Comparable getComparable(int i=0) const
 		{
@@ -98,6 +83,10 @@ class OrderedCollection
 		}
 		Comparable findMin() const
 		{
+			if(isEmpty())
+			{
+				return collection[0];
+			}
 			int i;
 			Comparable tempComp,min;
 			for(i=0;i<size;i++)
@@ -110,6 +99,10 @@ class OrderedCollection
 		}
 		Comparable findMax() const
 		{
+			if(isEmpty())
+			{
+				return collection[0];
+			}
 			int i;
 			Comparable tempComp,max;
 			for(i=0;i<size;i++)
@@ -124,7 +117,8 @@ class OrderedCollection
 /*//Testing Purposes
 int main()
 {
-	OrderedCollection<ComparableClass> oc1;
+	OrderedCollection<ComparableClass> oc1(5);
+	std::cout<<"test";
 	return 0;
 }
 */
